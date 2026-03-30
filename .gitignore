@@ -4,3 +4,8 @@ output/*.png
 .Rproj.user
 .DS_Store
 .DS_Store
+.RData
+.Rhistory
+.DS_Store
+.RData
+.Rhistory
