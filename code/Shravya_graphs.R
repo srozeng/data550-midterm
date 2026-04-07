@@ -48,4 +48,3 @@ e3 <- ggplot(nba_stats, aes(x = games, y = rebounds_defensive)) +
   theme_bw()
 
 ggsave("output/scatter_plot_3.png", plot = e3, width = 8, height = 6, dpi = 150)
-
