@@ -22,7 +22,7 @@ e1 <- ggplot(nba_stats, aes(x = position, y = pts, fill = position)) +
 ggsave("output/box_plot_1.png", plot = e1, width = 8, height = 6, dpi = 150) 
 
 
-#Element 2: Scattetrplot
+#Element 2: Scatterplot
 e2 <- ggplot(nba_stats, aes(x = age, y = mins_played)) +
   geom_point(alpha = 0.6, color = "steelblue") +
   geom_smooth(method = "lm", se = TRUE, color = "darkred") +

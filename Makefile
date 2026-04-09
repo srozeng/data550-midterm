@@ -1,5 +1,6 @@
 all: report.html
 
+## This command creates the final report
 report.html: report.Rmd \
   output/position_pts_anova_results.rds \
   output/position_pts_summary.rds \
@@ -10,18 +11,20 @@ report.html: report.Rmd \
   output/scatter_plot_3.png
 	Rscript code/03_render_report.R
 
+## This command creates the ANOVA and regression results
 output/position_pts_anova_results.rds \
 output/position_pts_summary.rds \
 output/age_mins_regression_results.rds \
 output/games_dreb_regression_results.rds: code/01_analysis.R data_clean/nba_combined.csv
 	Rscript code/01_analysis.R
 
+## This command creates graphs
 output/box_plot_1.png \
 output/scatter_plot_2.png \
 output/scatter_plot_3.png: code/Shravya_graphs.R data_clean/nba_combined.csv
 	Rscript code/Shravya_graphs.R
 
-## clean: 													This removes outputs
+## This clean: command removes outputs
 clean:
 	rm -f output/*.rds
 	rm -f output/*.png
