@@ -1,5 +1,27 @@
 # Report on NBA Statistics
 
+## Report Contents
+The final report evaluates 3 elements:
+
+(1) Does the position you play influence the number of points you score in the
+    game per 36 minutes?
+    
+(2) Does age influence the amount of time you spend on the court per 36 minutes?
+
+(3) Is there a correlation between the number of games played and the number of
+    defensive rebounds performed per 36 minutes? 
+
+The report includes descriptive statistics on points scored by position, an
+ANOVA comparing points by position, a linear regression on minutes played vs.
+age, and a linear regression on number of games played vs. number of defensive
+rebounds performed. 
+
+The report also includes a boxplot that shows the distribution of points
+scored per 36 minute by player position. The first scatterplot shows player age
+vs. minutes played per 36 minutes. The second scatterplot shows number of games
+played vs. defensive rebounds per 36 minutes for players.
+
+
 ------------------------------------------------------------------------
 
 ## Initial code description
@@ -63,8 +85,16 @@
 `Makefile`
 
   - contains rules for building the report
-  - XXXXXXXXXX`make .random_numbers` will generate the three `.rds` files needed to compile the report
-  - XXXXXXXXXXit will also create an empty file called `.random_numbers` in the project root directory, so that `make` properly knows when to update outputs
+  - `make all` will generate the final report
+  - `make output/games_dreb_regression_results.rds` will generate four
+    `.rds` files of descriptive statistics, regression, and ANOVA results in
+    the `/output` folder needed to compile the report
+  - `make output/scatter_plot_3.png` will generate 3 `.png` files of a boxplot
+    and 2 scatter plots in the `output` folder 
+
+`config.yml`
+
+  - X
 
 ------------------------------------------------------------------------
 
@@ -74,3 +104,6 @@
 
 Run `make all` command in Terminal to create outputs needed for report and to
 compile the final report.
+
+### Customizing the Report
+(INSERT INFO ON PARAMETERIZATION in config.yml and in 03_render_report.R)

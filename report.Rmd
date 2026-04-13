@@ -7,9 +7,9 @@ output: html_document
 
 
 ```{r, read-config, include = FALSE}
-config_list <- config::get(
-    config = Sys.getenv("WHICH_CONFIG")
-)
+# config_list <- config::get(
+#     config = Sys.getenv("WHICH_CONFIG")
+# )
 
 ```
 
@@ -20,6 +20,9 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 library(here)
 library(knitr)
 library(dplyr)
+
+# Set working directory
+here::i_am("report.Rmd")
 
 # Read ANOVA, descriptive stats, and regression results in
 anova_obj <- readRDS(here("output", "position_pts_anova_results.rds")) 
@@ -34,63 +37,69 @@ This report presents a reproducible analysis of the NBA Player Stats dataset. Th
 
 The analyses focus on understanding whether scoring differs across player positions and whether age and game participation are associated with minutes played and defensive rebounds. These relationships are explored using both analysis of variance and linear regression models.
 
-Table 1
+
+`r paste(anova_obj$title)`
 ```{r}
-cat(anova_obj$title, "\n\n")
-kable(anova_obj$table, digits = 3)
+kable(anova_obj$table, digits = 3) # Table 1. ANOVA results for Pts v. Position
 ```
 
 The ANOVA results indicate whether average points scored per 36 minutes differ across player positions. If the p-value is statistically significant (p < 0.05), this suggests that at least one position has a different mean scoring rate compared to others. This finding would support the idea that player position is associated with scoring performance. If the p-value is not significant, it suggests that scoring rates are relatively similar across positions.
 
-Table 2
+
+`r paste(summary_obj$title)`
 ```{r}
-cat(summary_obj$title, "\n\n")
-kable(summary_obj$table, digits = 2)
+kable(summary_obj$table, digits = 2) # Table 2. Descriptives of Pts v. Position
 ```
 
 The descriptive statistics provide a summary of scoring patterns across player positions. Differences in the mean and median points per 36 minutes suggest variation in offensive roles by position. Positions with higher average values may reflect players who are more involved in scoring, while lower values may indicate roles focused more on defense or playmaking. The standard deviation also highlights the variability in scoring within each position group.
 
-Table 3
+
+`r paste(age_obj$title)`
 ```{r}
-cat(age_obj$title, "\n\n")
+# Table 3. Linear regression of min. played v. age
 kable(age_obj$table, digits = 3)
 ```
 
 The linear regression results describe the association between player age and minutes played. The coefficient for age represents the expected change in minutes played for each additional year of age. A positive coefficient would suggest that older players tend to play more minutes, while a negative coefficient would indicate that younger players receive more playing time. If the p-value is statistically significant, this relationship is unlikely to be due to random variation. However, this analysis reflects association rather than causation.
 
-Table 4
+
+`r paste(games_obj$title)`
 ```{r}
-cat(games_obj$title, "\n\n")
+# Table 4. Linear regression of defensive rebounds vs. games played
 kable(games_obj$table, digits = 3)
 ```
 
 The regression results assess the relationship between the number of games played and defensive rebounds. A positive coefficient suggests that players who participate in more games tend to accumulate more defensive rebounds, which is expected given increased opportunities to play. If the relationship is statistically significant, it indicates a strong association between game participation and defensive performance. However, this relationship should be interpreted cautiously, as the number of games played inherently affects total rebound opportunities.
 
-Graphs (Elements)
+
+### Graphs (Elements)
 ```{r, echo=FALSE}
-knitr::include_graphics("output/box_plot_1.png")
-knitr::include_graphics("output/scatter_plot_2.png")
-knitr::include_graphics("output/scatter_plot_3.png")
+# Boxplot: pts v. position
+knitr::include_graphics("output/box_plot_1.png") 
+# Scatterplot: age v. minutes played
+knitr::include_graphics("output/scatter_plot_2.png") 
+# Scatterplot: games v. defensive rebounds 
+knitr::include_graphics("output/scatter_plot_3.png") 
 ```
 
-# Element 1: Position (Pos) and Points Scored (PTS)
+## Element 1: Position (Pos) and Points Scored (PTS)
 Does the position you play influence the number of points you score in the game per 36 minutes? 
 
 The boxplot illustrates the distribution of points scored per game per 36 minutes across the five NBA positions: Point Guard (PG), Shooting Guard (SG), Small Forward (SF), Power Forward (PF), and Center (C). The differences in scores across positions suggest that offensive role varies significantly by position, with guards typically contributing more points. The spread of each plot shows variability within positions, and outliers indicate players who perform above or below the standard for their role.
 
 
-# Element 2: Age (Age) and Minutes Played (MP) 
+## Element 2: Age (Age) and Minutes Played (MP) 
 Does age influence the amount of time you spend on the court per 36 minutes? 
 
 The scatterplot examines the relationship between player age and minutes played per 36 minutes. The red linear regression line depicts an overall trend, with the grey confidence interval reflecting projected uncertainty. A positive coefficient would suggest that older players tend to play more minutes, reflecting off of experience and established roles, while a negative coefficient may indicate that younger players are being substituted in more frequently. 
 
 
-# Element 3: Games (G) and Defensive Rebounds (DRB)
+## Element 3: Games (G) and Defensive Rebounds (DRB)
 Is there a correlation between the number of games played and the number of defensive rebounds performed per 36 minutes? 
 
 The scatterplot assesses the relationship between the number of games played and defensive rebounds per 36 minutes. A positive coefficient would suggest that players who appear in more games tend to accumulate more defensive rebounds, which reflect both consistency and position. To maintain statistical significance, a meaningful association between participation and defensive performance should be interpreted.
 
 
-Conclusion
+# Conclusion
 
 In summary, this report provides a structured and reproducible overview of selected relationships within the NBA Player Stats dataset. The analyses demonstrate how statistical methods can be used to explore differences in performance across positions and evaluate associations between player characteristics and outcomes. As additional components, such as visualizations, are developed, they can be seamlessly integrated into this workflow.
