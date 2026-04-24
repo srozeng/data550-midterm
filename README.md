@@ -38,25 +38,16 @@ www.basketball-reference.com
 
 ## Project Structure
 
-├── code/
-
-├── data_raw/
-
-├── data_clean/
-
-├── output/
-
-├── report.Rmd
-
-├── data550-midterm.Rproj
-
-├── README.md
-
-├── Makefile
-
-├── config.yml
-
-└── .gitignore
+├── code/  
+├── data_raw/  
+├── data_clean/  
+├── output/  
+├── report.Rmd  
+├── data550-midterm.Rproj  
+├── README.md  
+├── Makefile  
+├── config.yml  
+└── .gitignore  
 
 
 ## Initial code description
@@ -129,7 +120,8 @@ www.basketball-reference.com
   - `make output/scatter_plot_3.png` will generate 3 `.png` files of a boxplot
     and 2 scatter plots in the `output` folder 
   - `make clean` will remove all `output` and the `report.html`
-  - `make install` will restore the R package environment to that of lockfile
+  - `make install` uses the `renv` package to restore the R package environment
+    to that of lockfile
 
 `config.yml`
 
@@ -151,6 +143,7 @@ www.basketball-reference.com
 
 3. Install required R packages:
 `make install` 
+  - uses renv package to use project-specific package versions
 
 ------------------------------------------------------------------------
 
@@ -179,4 +172,5 @@ execution is not required.
 ### Example
 
 `export WHICH_CONFIG=firsthalf`
+
 `make all`
