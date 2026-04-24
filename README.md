@@ -127,9 +127,8 @@ www.basketball-reference.com
 
   - contains different configurations for report customization
   - configuration options:
-    - `default`: full dataset
-    - `firsthalf`: cutpoint of players in top half of ranks
-    - `secondhalf`: cutpoint of players in bottom half of ranks
+    - `default`: original colors of graphs
+    - `newcolors`: new, more muted colors of graphs
 
 ------------------------------------------------------------------------
 
@@ -147,30 +146,39 @@ www.basketball-reference.com
 
 ------------------------------------------------------------------------
 
+## Cleaning Output for Testing
+
+`make clean`
+  - cleans output and report .html files to "reset" clean folders for
+    more testing
+
+------------------------------------------------------------------------
+
 ## Creating the Report
 
 ### Customizing the Report
 In your terminal, execute command `export WHICH_CONFIG="name of config"` where
 you replace "name of config" with the name of the configuration in the
-`config.yml` you would like to run based on your data subset of interest.
-Configurations we have included decide on data subset by player rank--see below.
+`config.yml` you would like to run based on your graph colors of interest.
+Configurations we have included decide on graph color--see below.
 
 Configuration options include:
 
-  - `default`: full dataset
-  - `firsthalf`: cutpoint of players in top half of ranks
-  - `secondhalf`: cutpoint of players in bottom half of ranks
+  - `default`: original colors of graphs
+  - `newcolors`: new, more muted colors of graphs
 
 ### Compiling the Report
 
-Set the configuration before running `make all`.
-Run `make all` command in Terminal to create outputs needed for report and to
-compile the final report.
+Set the configuration before running `make report_config_${WHICH_CONFIG}.html`.
+
+Run `make report_config_${WHICH_CONFIG}.html` command in Terminal to create
+outputs needed for report and to compile the final report.
+
 The Makefile automatically runs all scripts in the correct order; manual
 execution is not required.
 
 ### Example
 
-`export WHICH_CONFIG=firsthalf`
+`export WHICH_CONFIG=newcolors`
 
-`make all`
+`make report_config_${WHICH_CONFIG}.html`

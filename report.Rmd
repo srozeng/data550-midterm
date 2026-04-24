@@ -75,13 +75,61 @@ The regression results assess the relationship between the number of games playe
 
 
 ### Graphs (Elements)
-```{r, echo=FALSE}
+```{r graph-original, echo=FALSE, eval=config_list$production}
 # Boxplot: pts v. position
 knitr::include_graphics("output/box_plot_1.png") 
 # Scatterplot: age v. minutes played
 knitr::include_graphics("output/scatter_plot_2.png") 
 # Scatterplot: games v. defensive rebounds 
 knitr::include_graphics("output/scatter_plot_3.png") 
+
+```
+
+```{r graph-colors, echo=FALSE, eval = !config_list$production}
+
+# Reload the plot
+library(ggplot2)
+
+# 1. Reload the objects
+e1_reloaded <- readRDS("output/box_plot_1.rds")
+e2_reloaded <- readRDS("output/scatter_plot_2.rds")
+e3_reloaded <- readRDS("output/scatter_plot_3.rds")
+
+# 2. Change colors for the Boxplot (Element 1)
+# Since you used 'fill = position', use scale_fill_manual
+e1_final <- e1_reloaded + 
+  scale_fill_manual(values = c(
+    "PG" = "#1b9e77", 
+    "SG" = "#d95f02", 
+    "SF" = "#7570b3", 
+    "PF" = "#e7298a", 
+    "C"  = "#66a61e"
+  )) +
+  labs(subtitle = "Updated with custom palette")
+
+# 3. Change colors for Scatterplots (Elements 2 & 3)
+# Since you used 'color = "trend"', use scale_color_manual
+# This will change both the points and the smoothing line color
+e2_final <- e2_reloaded + 
+  scale_color_manual(values = c("trend" = "lightblue4")) +
+  theme(legend.position = "none") # Hide the 'trend' legend
+
+e3_final <- e3_reloaded + 
+  scale_color_manual(values = c("trend" = "lightgoldenrod3")) +
+  theme(legend.position = "none")
+
+# 4. Save your new customized images
+ggsave("output/final_boxplot_1.png", e1_final, width = 8, height = 6)
+ggsave("output/final_scatter_1.png", e2_final, width = 8, height = 6)
+ggsave("output/final_scatter_2.png", e3_final, width = 8, height = 6)
+
+# Boxplot: pts v. position
+knitr::include_graphics("output/final_boxplot_1.png") 
+# Scatterplot: age v. minutes played
+knitr::include_graphics("output/final_scatter_1.png") 
+# Scatterplot: games v. defensive rebounds 
+knitr::include_graphics("output/final_scatter_2.png") 
+
 ```
 
 ## Element 1: Position (Pos) and Points Scored (PTS)

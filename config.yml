@@ -2,9 +2,5 @@ default:
   production: TRUE
   
   
-firsthalf:
-  production: TRUE
-# cutpoint: 
-
-secondhalf:
-  production: TRUE
+newcolors:
+  production: FALSE
