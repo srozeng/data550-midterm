@@ -111,14 +111,27 @@ www.basketball-reference.com
     games played and rate of defensive rebounds.
 
 `Makefile`
-
   - contains rules for building the report
+  
+  Report:
   - `make all` will generate the final report
-  - `make output/games_dreb_regression_results.rds` will generate four
+  - `make report_config_${WHICH_CONFIG}.html` will also generate final report
+  
+  Data Cleaning:
+  - `make data_clean/ana_clean.csv` will run cleaning script for first half of
+    players by rank
+  - `make data_clean/toni_clean.csv` will run cleaning script for second half of
+    players by rank
+  - `make data_clean/nba_combined.csv` will combine cleaned half datasets for
+    full cleaned dataset
+  
+  Output:
+  - `make output/games_dreb_regression_results.rds &` will generate four
     `.rds` files of descriptive statistics, regression, and ANOVA results in
     the `/output` folder needed to compile the report
-  - `make output/scatter_plot_3.png` will generate 3 `.png` files of a boxplot
-    and 2 scatter plots in the `output` folder 
+  - `make output/scatter_plot_3.png &` will generate 3 `.png` files of a boxplot
+    and 2 scatter plots as well as 3 `.rds` files of the same graphs with diff
+    colors in the `output` folder 
   - `make clean` will remove all `output` and the `report.html`
   - `make install` uses the `renv` package to restore the R package environment
     to that of lockfile
