@@ -14,5 +14,11 @@ colnames(toni_clean)
 # Combine into one dataset
 nba_combined <- bind_rows(ana_clean, toni_clean)
 
+# Sanity checks
+cat("Ana rows:", nrow(ana_clean), "\n")
+cat("Toni 2 rows:", nrow(toni_clean), "\n")
+cat("Combined rows:", nrow(nba_combined), "\n")
+cat("Duplicate players:", sum(duplicated(nba_combined$player)), "\n")
+
 # Save combined dataset for TEAM :)
 write.csv(nba_combined, here("data_clean", "nba_combined.csv"), row.names = FALSE)
